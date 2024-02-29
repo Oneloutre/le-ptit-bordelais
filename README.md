@@ -27,7 +27,7 @@ Before every install step, download the git repo with
 
 Then, when it's done, create a file named `config.py`
 
-in this file, simply write `BOT_TOKEN = "YOUR BOT TOKEN` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
+in this file, simply write `BOT_TOKEN = "YOUR BOT TOKEN"` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
 
 ### Using Python :snake: directly :
 
