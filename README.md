@@ -19,7 +19,7 @@ We coded it for fun since we had nothing else to do (I hate maths.)
 
 ---
 
-## Installation :wrench: :
+# Installation :wrench: :
 
 Before every install step, download the git repo with
 
