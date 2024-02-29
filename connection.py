@@ -33,7 +33,7 @@ async def pont(ctx):
 
 async def aide(ctx):
     embed = discord.Embed(title="Github du bot",
-                      url="https://github.com/oneloutre",
+                      url="https://github.com/Oneloutre/le-ptit-bordelais",
                       description="__Liste des commandes :__\n\n• /pont : affiche les prochaines levées du pont\n**--------------------------------**\n\n• /aide : Affiche ce menu",
                       colour=0xf500ed,
                       timestamp=datetime.datetime.now())
