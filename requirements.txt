@@ -23,3 +23,5 @@ six==1.16.0
 sqlparse==0.4.4
 urllib3==2.2.1
 yarl==1.9.4
+
+Faker~=23.3.0
