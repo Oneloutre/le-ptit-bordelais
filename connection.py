@@ -3,6 +3,11 @@ import discord
 import apis.pont_chaban as pont_chaban
 import datetime
 import apis.fakeid as fakeidy
+import apis.insulte as insulta
+import cloudscraper
+import random
+
+requests = cloudscraper.create_scraper()
 
 bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
 
@@ -15,7 +20,7 @@ bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
 
 async def pont(ctx):
     embed = pont_chaban.SendPont()
-    await ctx.response.send_message(embed=embed)
+    await ctx.response.send_message(embed=embed, mention_author=True)
 
 
 @bot.tree.command(
@@ -29,6 +34,7 @@ async def aide(ctx):
                       description="__Liste des commandes :__"
                                   "\n\n 🌉 |   `/pont` : affiche les prochaines levées du pont"
                                   "\n 👤 |   `/fakeid` : Génère une fausse identité"
+                                  "\n 🤬 |   `/insulte` : Génère une insulte plus ou moins polie"
                                   "\n**--------------------------------**"
                                   "\n\n ℹ️ |   `/aide` : Affiche ce menu",
                       colour=0xf500ed,
@@ -53,6 +59,23 @@ async def fakeid(ctx):
     embed.set_footer(text="With ❤️ by Mathis & Roch", icon_url="https://cdn.onelots.fr/u/EQndLM.svg")
     await ctx.response.send_message(embed=embed)
 
+@bot.tree.command(
+    name="insulte",
+    description="Génère une insulte plus ou moins polie"
+)
+
+async def insulte(ctx):
+    insult = insulta.generateInsulte()
+    await ctx.response.send_message(insult)
+
+@bot.tree.command(
+    name="addinsulte",
+    description="Ajoute une insulte à la liste",
+)
+
+async def addinsulte(ctx : commands.Context, insulte : str):
+    result = insulta.addinsulte(ctx, insulte)
+    await ctx.response.send_message(result)
 
 async def openingNOW(time, ctx):
     embed = discord.Embed(title="Lien de l'api utilisée", url="https://opendata.bordeaux-metropole.fr/explore/dataset/previsions_pont_chaban/api/", colour=0x00b0f4,
@@ -63,12 +86,15 @@ async def openingNOW(time, ctx):
     await ctx.response.send_message(embed=embed)
 
 
+
+
 @bot.event
 async def on_ready():
     await bot.tree.sync()
     await bot.get_channel(1213023082197946418).send("Redémarré • 🔃")
     await bot.change_presence(activity=discord.Game(name="Scraper MY BOI"), status=discord.Status.online)
     await getNextOpening.start()
+
 
 
 @tasks.loop(minutes=10.0)
