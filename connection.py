@@ -5,7 +5,7 @@ import datetime
 import apis.fakeid as fakeidy
 import apis.insulte as insulta
 import cloudscraper
-import random
+import apis.nasa as nasapi
 
 requests = cloudscraper.create_scraper()
 
@@ -36,6 +36,7 @@ async def aide(ctx):
                                   "\n 👤 |   `/fakeid` : Génère une fausse identité"
                                   "\n 🤬 |   `/insulte` : Génère une insulte plus ou moins polie"
                                   "\n 🗣️ |   `/addinsulte [insulte]` : Ajoute une insulte à la liste"
+                                  "\n 🚀 |   `/nasa` : Envoie une image aléatoire de la NASA"
                                   "\n**--------------------------------**"
                                   "\n\n ℹ️ |   `/aide` : Affiche ce menu",
                       colour=0xf500ed,
@@ -87,6 +88,19 @@ async def openingNOW(time, ctx):
     await ctx.response.send_message(embed=embed)
 
 
+@bot.tree.command(
+    name="nasa",
+    description="Envoie une image aléatoire de la NASA"
+)
+
+async def nasa(ctx):
+    image = nasapi.nasa()
+    embed = discord.Embed(colour=0x691b93, description=f"Voici une image aléatoire de la NASA : ")
+    embed.set_image(url=image)
+    try:
+        await ctx.response.send_message(embed=embed)
+    except Exception as e:
+        await ctx.response.send(nasa)
 
 
 @bot.event
