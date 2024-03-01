@@ -35,6 +35,7 @@ async def aide(ctx):
                                   "\n\n 🌉 |   `/pont` : affiche les prochaines levées du pont"
                                   "\n 👤 |   `/fakeid` : Génère une fausse identité"
                                   "\n 🤬 |   `/insulte` : Génère une insulte plus ou moins polie"
+                                  "\n 🗣️ |   `/addinsulte [insulte]` : Ajoute une insulte à la liste"
                                   "\n**--------------------------------**"
                                   "\n\n ℹ️ |   `/aide` : Affiche ce menu",
                       colour=0xf500ed,
@@ -90,8 +91,8 @@ async def openingNOW(time, ctx):
 
 @bot.event
 async def on_ready():
-    await bot.tree.sync()
     await bot.get_channel(1213023082197946418).send("Redémarré • 🔃")
+    await bot.tree.sync()
     await bot.change_presence(activity=discord.Game(name="Scraper MY BOI"), status=discord.Status.online)
     await getNextOpening.start()
 
