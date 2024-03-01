@@ -37,4 +37,4 @@ def getNextHourOpen():
         date = datetime.datetime.strptime(i["date_passage"], "%Y-%m-%d")
         if (int(hour) - int(datetime.datetime.now().strftime('%H')) <= 2 and int(hour) - int(datetime.datetime.now().strftime('%H')) > 0) and date.strftime("%Y-%m-%d") == datetime.datetime.now().strftime("%Y-%m-%d"):
             return (1, (int(hour) - int(datetime.datetime.now().strftime('%H'))))
-    return (0)
+    return (0, 0)
