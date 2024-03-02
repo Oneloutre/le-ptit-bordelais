@@ -12,7 +12,7 @@ You can find the LPB bot image for Docker [here](https://hub.docker.com/r/lzerte
 ## 🐳 Docker Run Command
 To run the bot with Docker, execute the following command:
 ```
-docker run -e BOT_TOKEN=<YOUR_DISCORD_TOKEN> -d --name <RUNNING_NAME> lzerteur/lpb:<TAG>
+docker run -e BOT_TOKEN=<YOUR_TOKEN_IN_PLAINTTEXT> -e DISCORD_CHANNEL_ID=<YOUR_ID_CHANNEL_IN_PLAINTTEXT> -d --name lpb-dockerized lzerteur/lpb:<TAG>
 ```
 
 ## 🐳 Docker Compose Configuration
@@ -20,11 +20,12 @@ Alternatively, you can use Docker Compose. Add the following to your `docker-com
 ```
 version: '3.8'
 services:
-  mon_service:
+  bot:
     image: lzerteur/lpb:<TAG>
+    container_name: lpb-dockerized
     environment:
-      BOT_TOKEN: "<YOUR_DISCORD_TOKEN>"
-      DISCORD_CHANNEL_ID: "<YOUR_CHANNEL_ID>"
+      - BOT_TOKEN=<YOUR_TOKEN_IN_PLAINTTEXT>
+      - DISCORD_CHANNEL_ID=<YOUR_ID_CHANNEL_IN_PLAINTTEXT>
     restart: unless-stopped
 ```
 
