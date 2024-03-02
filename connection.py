@@ -134,7 +134,7 @@ async def roulette(ctx):
             await ctx.response.send_message(embed=embed)
         except Exception as e:
             await ctx.response.send("nickel ça marche pas")
-        await user.send(f"Tu es décédé, et tu as été kick du serv.... Pour le rejoindre, c'est ici : https://discord.gg/w3uHqzPEXE")
+        await user.send(f"Tu es décédé, et tu as été kick du serv.... Pour le rejoindre, c'est ici : https://discord.gg/bfXvSgTa2n")
         await user.send(emoji_death)
         await user.send("Gros nullos")
         await user.kick(reason=f"{emoji_death} | Tu es mort...... RIP")
