@@ -7,6 +7,7 @@ import apis.insulte as insulta
 import cloudscraper
 import apis.nasa as nasapi
 import apis.earth as earthapi
+import apis.russianRoulette as rouletteapi
 
 requests = cloudscraper.create_scraper()
 
@@ -112,11 +113,31 @@ async def nasa(ctx):
 async def earth(ctx):
     image = earthapi.earth()
     embed = discord.Embed(colour=0x691b93, description=f"Voici une image aléatoire de la Terre : ")
-    embed.set_image(url=image)
+    file = discord.File(image, filename="image.jpg")
+    embed.set_image(url="attachment://image.jpg")
+    try:
+        await ctx.response.send_message(embed=embed, file=file)
+    except Exception as e:
+        await ctx.response.send(earth)
+        
+@bot.tree.command(
+    name="roulette",
+    description="Lance une partie de roulette russe.... attention, si vous perdez, vous êtes kick !",
+)
+
+async def roulette(ctx):
+    result = rouletteapi.roulette()
+    print(ctx.user.id)
+    if result:
+        embed = discord.Embed(colour=0x691b93, description=f"BANG ! Vous avez perdu !")
+        user = ctx.guild.get_member(ctx.user.id)
+        await user.kick(reason="Tu es mort...... RIP")
+    else:
+        embed = discord.Embed(colour=0x691b93, description=f"Clic..... Vous avez survécu !")
     try:
         await ctx.response.send_message(embed=embed)
     except Exception as e:
-        await ctx.response.send(nasa)
+        await ctx.response.send("nickel ça marche pas")
 
 
 @bot.event
