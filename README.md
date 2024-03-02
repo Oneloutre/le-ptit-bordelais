@@ -7,7 +7,7 @@
 # BOT DISCORD Le P'tit Bordelais 
 
 ## 🔍 Retrieving the LPB bot image for Docker
-You can find the LPB bot image for Docker [![View on Docker Hub](https://img.shields.io/static/v1?label=View%20on&message=Docker%20Hub&color=blue&style=flat-square)](https://hub.docker.com/repository/docker/lzerteur/lpb/).
+You can find the LPB bot image for Docker ➡️  [![View on Docker Hub](https://img.shields.io/static/v1?label=View%20on&message=Docker%20Hub&color=blue&style=flat-square)](https://hub.docker.com/repository/docker/lzerteur/lpb/).
 
 ## 🐳 Docker Run Command
 To run the bot with Docker, execute the following command:
