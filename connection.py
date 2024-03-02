@@ -39,6 +39,8 @@ async def aide(ctx):
                                   "\n 🤬 |   `/insulte` : Génère une insulte plus ou moins polie"
                                   "\n 🗣️ |   `/addinsulte [insulte]` : Ajoute une insulte à la liste"
                                   "\n 🚀 |   `/nasa` : Envoie une image aléatoire de la NASA"
+                                  "\n 🌍 |   `/earth` : Envoie une image aléatoire de la Terre"
+                                  "\n 🔫 |   `/roulette` : Lance une partie de roulette russe.... attention, si vous perdez, vous êtes kick !"
                                   "\n**--------------------------------**"
                                   "\n\n ℹ️ |   `/aide` : Affiche ce menu",
                       colour=0xf500ed,
@@ -120,28 +122,33 @@ async def earth(ctx):
 async def roulette(ctx):
     result = rouletteapi.roulette()
     print(ctx.user.id)
+    emoji_death = bot.get_emoji(1213495608464248832)
+    emoji_life = str(bot.get_emoji(1213495661710807040))
     if result:
-        embed = discord.Embed(colour=0x691b93, description=f"BANG ! Vous avez perdu !")
+        embed = discord.Embed(colour=0x691b93, description=f"{emoji_death} | BANG ! Vous avez perdu !", timestamp=datetime.datetime.now())
+        embed.set_author(name="Roulette Russe")
+        embed.set_thumbnail(url="https://cdn.onelots.fr/u/VwRaYK.jpg")
+        embed.set_footer(icon_url="https://cdn.onelots.fr/u/4ZW8nv.jpg")
         user = ctx.guild.get_member(ctx.user.id)
-        await user.send("Tu es décédé, et tu as été kick du serv.... Pour le rejoindre, c'est ici : https://discord.gg/w3uHqzPEXE")
-        await user.kick(reason="Tu es mort...... RIP")
+        try:
+            await ctx.response.send_message(embed=embed)
+        except Exception as e:
+            await ctx.response.send("nickel ça marche pas")
+        await user.send(f"Tu es décédé, et tu as été kick du serv.... Pour le rejoindre, c'est ici : https://discord.gg/w3uHqzPEXE")
+        await user.send(emoji_death)
+        await user.send("Gros nullos")
+        await user.kick(reason=f"{emoji_death} | Tu es mort...... RIP")
     else:
-        embed = discord.Embed(colour=0x691b93, description=f"Clic..... Vous avez survécu !")
-    try:
-        await ctx.response.send_message(embed=embed)
-    except Exception as e:
-        await ctx.response.send("nickel ça marche pas")
+        embed = discord.Embed(colour=0x691b93, description=f"{emoji_life} | Clic..... Vous avez survécu !", timestamp=datetime.datetime.now())
+        embed.set_author(name="Roulette Russe")
+        embed.set_thumbnail(url="https://cdn.onelots.fr/u/VwRaYK.jpg")
+        embed.set_footer(icon_url="https://cdn.onelots.fr/u/4ZW8nv.jpg")
+        try:
+            await ctx.response.send_message(embed=embed)
+        except Exception as e:
+            await ctx.response.send("nickel ça marche pas")
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-    if message.content.startswith('Bonjour'):
-        await message.channel.send('Salut')
-    if message.author != bot.user:
-        with open(f"logs.txt", "a") as file:
-            file.write(f"{message.author} : {message.content}\n")
-    await bot.process_commands(message)
+
 
 @bot.event
 async def on_ready():
