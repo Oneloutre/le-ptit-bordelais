@@ -81,14 +81,6 @@ async def addinsulte(ctx : commands.Context, insulte : str):
     result = insulta.addinsulte(ctx, insulte)
     await ctx.response.send_message(result)
 
-async def openingNOW(time, ctx):
-    embed = discord.Embed(title="Lien de l'api utilisée", url="https://opendata.bordeaux-metropole.fr/explore/dataset/previsions_pont_chaban/api/", colour=0x00b0f4,
-                          description=f"**Attention, le pont va bientôt s'ouvrir dans {time} minutes !!!!!!**")
-    embed.set_author(name="Levée et fermeture du pont Chaban")
-    embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Logo_Efrei_2022.svg/512px-Logo_Efrei_2022.svg.png")
-    embed.set_image(url="https://passion-aquitaine.ouest-france.fr/wp-content/uploads/2018/02/chaban-bassins-flot.jpg")
-    await ctx.response.send_message(embed=embed)
-
 
 @bot.tree.command(
     name="nasa",
@@ -140,6 +132,16 @@ async def roulette(ctx):
     except Exception as e:
         await ctx.response.send("nickel ça marche pas")
 
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+    if message.content.startswith('Bonjour'):
+        await message.channel.send('Salut')
+    if message.author != bot.user:
+        with open(f"logs.txt", "a") as file:
+            file.write(f"{message.author} : {message.content}\n")
+    await bot.process_commands(message)
 
 @bot.event
 async def on_ready():
@@ -154,7 +156,7 @@ async def on_ready():
 async def getNextOpening():
     getNextOpening = pont_chaban.getNextHourOpen()
     if(getNextOpening[0]):
-        await openingNOW(getNextOpening[1])
+        await pont_chaban.openingNOW(getNextOpening[1])
 
 
 
