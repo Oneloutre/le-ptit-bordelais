@@ -123,6 +123,7 @@ async def roulette(ctx):
     if result:
         embed = discord.Embed(colour=0x691b93, description=f"BANG ! Vous avez perdu !")
         user = ctx.guild.get_member(ctx.user.id)
+        await user.send("Tu es décédé, et tu as été kick du serv.... Pour le rejoindre, c'est ici : https://discord.gg/w3uHqzPEXE")
         await user.kick(reason="Tu es mort...... RIP")
     else:
         embed = discord.Embed(colour=0x691b93, description=f"Clic..... Vous avez survécu !")
