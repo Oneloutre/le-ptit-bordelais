@@ -102,6 +102,16 @@ async def nasa(ctx):
     except Exception as e:
         await ctx.response.send(nasa)
 
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+    if message.content.startswith('Bonjour'):
+        await message.channel.send('Salut')
+    if message.author != bot.user:
+        with open(f"logs.txt", "a") as file:
+            file.write(f"{message.author} : {message.content}\n")
+    await bot.process_commands(message)
 
 @bot.event
 async def on_ready():
