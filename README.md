@@ -2,7 +2,7 @@
 
 ---
 
-![GitHub license](https://img.shields.io/github/license/oneloutre/le-ptit-bordelais) ![GitHub last commit](https://img.shields.io/github/last-commit/oneloutre/le-ptit-bordelais)![language](https://img.shields.io/badge/language-python-blue) ![GitHub repo size](https://img.shields.io/github/repo-size/oneloutre/le-ptit-bordelais) ![Made with love](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8F_Made_with-love-red) 
+![GitHub license](https://img.shields.io/github/license/oneloutre/le-ptit-bordelais) ![GitHub last commit](https://img.shields.io/github/last-commit/oneloutre/le-ptit-bordelais)![language](https://img.shields.io/badge/language-python-blue) ![GitHub repo size](https://img.shields.io/github/repo-size/oneloutre/le-ptit-bordelais) ![Made with love](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8F_Made_with-love-red) [![View on Docker Hub](https://img.shields.io/static/v1?label=View%20on&message=Docker%20Hub&color=blue&style=flat-square)](https://hub.docker.com/repository/docker/lzerteur/lpb/)
 
 # BOT DISCORD Le P'tit Bordelais 
 
