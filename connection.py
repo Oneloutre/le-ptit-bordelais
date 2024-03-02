@@ -1,5 +1,7 @@
 from discord.ext import commands, tasks
 import discord
+import os
+from dotenv import load_dotenv
 import apis.pont_chaban as pont_chaban
 import datetime
 import apis.fakeid as fakeidy
@@ -8,6 +10,17 @@ import cloudscraper
 import apis.nasa as nasapi
 import apis.earth as earthapi
 import apis.russianRoulette as rouletteapi
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+# Accéder à l'ID du canal depuis les variables d'environnement
+CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
+
+requests = cloudscraper.create_scraper()
+
+bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
+
 
 requests = cloudscraper.create_scraper()
 
@@ -145,10 +158,16 @@ async def on_message(message):
 
 @bot.event
 async def on_ready():
-    await bot.get_channel(1213023082197946418).send("Redémarré • 🔃")
+    channel_id = int(os.getenv("DISCORD_CHANNEL_ID"))
+    channel = bot.get_channel(channel_id)
+    if channel:  # Vérifie si le canal a été trouvé
+        await channel.send("Redémarré • 🔃")
+    else:
+        print(f"Erreur : Canal avec ID {channel_id} non trouvé.")
     await bot.tree.sync()
     await bot.change_presence(activity=discord.Game(name="Scraper MY BOI"), status=discord.Status.online)
     await getNextOpening.start()
+
 
 
 
@@ -157,7 +176,3 @@ async def getNextOpening():
     getNextOpening = pont_chaban.getNextHourOpen()
     if(getNextOpening[0]):
         await pont_chaban.openingNOW(getNextOpening[1])
-
-
-
-
