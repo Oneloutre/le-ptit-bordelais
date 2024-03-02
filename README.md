@@ -1,13 +1,17 @@
-LPB Bot Readme
+# BOT DISCORD Le P'tit Bordelais Readme
 
-You can retrieve the LPB bot image for Docker here.
+## 🔍 Retrieving the LPB bot image for Docker
+You can find the LPB bot image for Docker [here](https://hub.docker.com/r/lzerteur/lpb).
 
-To run with Docker, use the following command:
-
+## 🐳 Docker Run Command
+To run the bot with Docker, execute the following command:
+```
 docker run -e BOT_TOKEN=<YOUR_DISCORD_TOKEN> -d --name <RUNNING_NAME> lzerteur/lpb:<TAG>
+```
 
-Alternatively, you can use Docker Compose:
-
+## 🐳 Docker Compose Configuration
+Alternatively, you can use Docker Compose. Add the following to your `docker-compose.yml` file:
+```
 version: '3.8'
 services:
   mon_service:
@@ -15,19 +19,22 @@ services:
     environment:
       BOT_TOKEN: "<YOUR_DISCORD_TOKEN>"
     restart: unless-stopped
+```
 
-If you want to interact with the bot, check out the command guide below:
+## 💬 Command Guide
+If you want to interact with the bot, here are the available commands:
 
-🌉 | /pont : Display upcoming bridge openings
-👤 | /fakeid : Generate a fake identity
-🤬 | /insulte : Generate a more or less polite insult
-🗣️ | /addinsulte [insulte] : Add an insult to the list
-🚀 | /nasa : Send a random image from NASA
-🌍 | /earth : Send a random image of Earth
-🔫 | /roulette : Play a game of Russian roulette... beware, if you lose, you get kicked!
+- 🌉 | `/pont` : Display upcoming bridge openings
+- 👤 | `/fakeid` : Generate a fake identity
+- 🤬 | `/insulte` : Generate a more or less polite insult
+- 🗣️ | `/addinsulte [insulte]` : Add an insult to the list
+- 🚀 | `/nasa` : Send a random image from NASA
+- 🌍 | `/earth` : Send a random image of Earth
+- 🔫 | `/roulette` : Play a game of Russian roulette... beware, if you lose, you get kicked!
 
 For more information, type:
-
+```
 ℹ️ | /aide : Display this menu
+```
 
-Enjoy interacting with LPB bot!
+Enjoy interacting with LPB bot! 🤖
