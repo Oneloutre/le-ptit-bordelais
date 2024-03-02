@@ -24,6 +24,7 @@ services:
     image: lzerteur/lpb:<TAG>
     environment:
       BOT_TOKEN: "<YOUR_DISCORD_TOKEN>"
+      DISCORD_CHANNEL_ID: "<YOUR_CHANNEL_ID>"
     restart: unless-stopped
 ```
 
