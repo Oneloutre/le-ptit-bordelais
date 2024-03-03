@@ -1,5 +1,7 @@
 from discord.ext import commands, tasks
 import discord
+import os
+from dotenv import load_dotenv
 import apis.pont_chaban as pont_chaban
 import datetime
 import apis.fakeid as fakeidy
@@ -8,6 +10,16 @@ import cloudscraper
 import apis.nasa as nasapi
 import apis.earth as earthapi
 import apis.russianRoulette as rouletteapi
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
+
+# Accéder à l'ID du canal depuis les variables d'environnement
+CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
+
+requests = cloudscraper.create_scraper()
+
+bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
 
 requests = cloudscraper.create_scraper()
 
@@ -18,8 +30,6 @@ bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
     name="pont",
     description="Une commande pour se tenir au courant du lever de pont (et éviter les retards d'Alexis et Mathis)"
 )
-
-
 async def pont(ctx):
     embed = pont_chaban.SendPont()
     await ctx.response.send_message(embed=embed, mention_author=True)
@@ -29,7 +39,6 @@ async def pont(ctx):
     name="aide",
     description="Pour connaitre toutes les commandes à utiliser"
 )
-
 async def aide(ctx):
     embed = discord.Embed(title="Github du bot",
                       url="https://github.com/Oneloutre/le-ptit-bordelais",
@@ -56,30 +65,29 @@ async def aide(ctx):
     name="fakeid",
     description="Génère une fausse identité pour vous inscrire sur des sites par exemple"
 )
-
-
 async def fakeid(ctx):
     fakeidentity = fakeidy.fakeidy()
-    embed = discord.Embed(title="Nouvelle identité générée", colour=0x6e00f5, description=fakeidentity, timestamp=datetime.datetime.now())
+    embed = discord.Embed(title="Nouvelle identité générée", colour=0x6e00f5, description=fakeidentity,
+                          timestamp=datetime.datetime.now())
     embed.set_thumbnail(url="https://cdn.onelots.fr/u/4ZW8nv.jpg")
     embed.set_footer(text="With ❤️ by Mathis & Roch", icon_url="https://cdn.onelots.fr/u/EQndLM.svg")
     await ctx.response.send_message(embed=embed)
+
 
 @bot.tree.command(
     name="insulte",
     description="Génère une insulte plus ou moins polie"
 )
-
 async def insulte(ctx):
     insult = insulta.generateInsulte()
     await ctx.response.send_message(insult)
+
 
 @bot.tree.command(
     name="addinsulte",
     description="Ajoute une insulte à la liste",
 )
-
-async def addinsulte(ctx : commands.Context, insulte : str):
+async def addinsulte(ctx: commands.Context, insulte: str):
     result = insulta.addinsulte(ctx, insulte)
     await ctx.response.send_message(result)
 
@@ -88,7 +96,6 @@ async def addinsulte(ctx : commands.Context, insulte : str):
     name="nasa",
     description="Envoie une image aléatoire de la NASA"
 )
-
 async def nasa(ctx):
     image = nasapi.nasa()
     embed = discord.Embed(colour=0x691b93, description=f"Voici une image aléatoire de la NASA : ")
@@ -97,13 +104,12 @@ async def nasa(ctx):
         await ctx.response.send_message(embed=embed)
     except Exception as e:
         await ctx.response.send(nasa)
-        
+
 
 @bot.tree.command(
     name="earth",
     description="Envoie une image aléatoire de la Terre"
 )
-
 async def earth(ctx):
     image = earthapi.earth()
     embed = discord.Embed(colour=0x691b93, description=f"Voici une image aléatoire de la Terre : ")
@@ -113,12 +119,12 @@ async def earth(ctx):
         await ctx.response.send_message(embed=embed, file=file)
     except Exception as e:
         await ctx.response.send(earth)
-        
+
+
 @bot.tree.command(
     name="roulette",
     description="Lance une partie de roulette russe.... attention, si vous perdez, vous êtes kick !",
 )
-
 async def roulette(ctx):
     result = rouletteapi.roulette()
     print(ctx.user.id)
@@ -150,21 +156,22 @@ async def roulette(ctx):
 
 
 
+
 @bot.event
 async def on_ready():
-    await bot.get_channel(1213023082197946418).send("Redémarré • 🔃")
+    channel_id = int(os.getenv("DISCORD_CHANNEL_ID"))
+    channel = bot.get_channel(channel_id)
+    if channel:  # Vérifie si le canal a été trouvé
+        await channel.send("Restarted • 🔃")
+    else:
+        print(f"Error : Canal with ID {channel_id} not found.")
     await bot.tree.sync()
-    await bot.change_presence(activity=discord.Game(name="Scraper MY BOI"), status=discord.Status.online)
+    await bot.change_presence(activity=discord.Game(name="🐋Dockerized by Zerteur🤖"), status=discord.Status.online)
     await getNextOpening.start()
-
 
 
 @tasks.loop(minutes=10.0)
 async def getNextOpening():
     getNextOpening = pont_chaban.getNextHourOpen()
-    if(getNextOpening[0]):
+    if (getNextOpening[0]):
         await pont_chaban.openingNOW(getNextOpening[1])
-
-
-
-
