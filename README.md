@@ -25,10 +25,11 @@ Before every install step, download the git repo with
 
 ```git clone https://github.com/Oneloutre/le-ptit-bordelais.git```
 
-Then, when it's done, create a file named `config.py`
+Then, when it's done, create a file named `.env`
 
-in this file, simply write `BOT_TOKEN = "YOUR BOT TOKEN"` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
+in this file, simply write `BOT_TOKEN="'OUR BOT TOKEN'` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
 
+this step is useful, in particular if you use docker since the prompt won't show.
 ### Using Python :snake: directly :
 
 Go in your folder using `cd le-ptit-bordelais` and then :
