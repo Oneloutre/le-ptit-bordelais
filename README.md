@@ -32,6 +32,7 @@ services:
 ## 💬 Command Guide
 If you want to interact with the bot, here are the available commands:
 
+=======
 - 🌉 | `/pont` : Display upcoming bridge openings
 - 👤 | `/fakeid` : Generate a fake identity
 - 🤬 | `/insulte` : Generate a more or less polite insult
@@ -45,4 +46,35 @@ For more information, type:
 ℹ️ | /aide : Display this menu
 ```
 
+
+---
+
+# Manual installation (not recommended unless for developement) :wrench: :
+
+Before every install step, download the git repo with
+
+```git clone https://github.com/Oneloutre/le-ptit-bordelais.git```
+
+Then, when it's done, create a file named `.env`
+
+in this file, simply write `BOT_TOKEN="'OUR BOT TOKEN'` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
+
+this step is useful, in particular if you use docker since the prompt won't show.
+### Using Python :snake: directly :
+
+Go in your folder using `cd le-ptit-bordelais` and then :
+
+Execute `pip install -r requirements.txt` then `python main.py`
+
+:warning: make sure that you're using Python **3.12** !
+
+### Using Docker :whale: :
+
+Execute `docker build -t le-ptit-bordelais .` then `docker run -d le-ptit-bordelais`
+
 Enjoy interacting with LPB bot! 🤖
+
+
+# Special thanks :heart: :
+
+Thanks to [Lzerteur](https://github.com/Lzerteur) for the Dockerization of the bot and the help with the README.md file.
