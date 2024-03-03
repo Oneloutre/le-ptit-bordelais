@@ -15,6 +15,8 @@ To run the bot with Docker, execute the following command:
 docker run -e BOT_TOKEN=<YOUR_TOKEN_IN_PLAINTTEXT> -e DISCORD_CHANNEL_ID=<YOUR_ID_CHANNEL_IN_PLAINTTEXT> -d --name lpb-dockerized lzerteur/lpb:<TAG>
 ```
 
+⚠️ The DISCORD_CHANNEL_ID will be the channel used for some logs such as when the bot is restarted
+
 ## 🐳 Docker Compose Configuration
 Alternatively, you can use Docker Compose. Add the following to your `docker-compose.yml` file:
 ```
@@ -57,9 +59,10 @@ Before every install step, download the git repo with
 
 Then, when it's done, create a file named `.env`
 
-in this file, simply write `BOT_TOKEN="'OUR BOT TOKEN'` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
+In this file, simply write `BOT_TOKEN="'OUR BOT TOKEN'` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
+Don't forget to add `DISCORD_CHANNEL_ID=YOUR DEV CHANNEL ID` for the channel where some actions such as restarts will be logged.
 
-this step is useful, in particular if you use docker since the prompt won't show.
+This step is useful, in particular if you use docker since the prompt won't show.
 ### Using Python :snake: directly :
 
 Go in your folder using `cd le-ptit-bordelais` and then :
