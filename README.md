@@ -59,7 +59,7 @@ Before every install step, download the git repo with
 
 Then, when it's done, create a file named `.env`
 
-In this file, simply write `BOT_TOKEN="YOUR BOT TOKEN'` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
+In this file, simply write `BOT_TOKEN='YOUR BOT TOKEN'` and of course, replacing "YOUR BOT TOKEN" with... Your token. It makes sense, right ?
 Don't forget to add `DISCORD_CHANNEL_ID=YOUR DEV CHANNEL ID` for the channel where some actions such as restarts will be logged.
 
 This step is useful, in particular if you use docker since the prompt won't show.
