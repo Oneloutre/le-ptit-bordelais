@@ -166,7 +166,7 @@ async def on_ready():
     else:
         print(f"Error : Canal with ID {channel_id} not found.")
     await bot.tree.sync()
-    await bot.change_presence(activity=discord.Game(name="🐋Dockerized by Zerteur🤖"), status=discord.Status.online)
+    await bot.change_presence(activity=discord.Game(name="Scraper my BOI • Thx Zerteur for the dockerization 🐋"), status=discord.Status.online)
     await getNextOpening.start()
 
 
