@@ -12,7 +12,12 @@ You can find the LPB bot image for Docker ➡️  [![View on Docker Hub](https:/
 ## 🐳 Docker Run Command
 To run the bot with Docker, execute the following command:
 ```
-docker run -e BOT_TOKEN=<YOUR_TOKEN_IN_PLAINTTEXT> -e DISCORD_CHANNEL_ID=<YOUR_ID_CHANNEL_IN_PLAINTTEXT> -d --name lpb-dockerized lzerteur/lpb:<TAG>
+docker run -d \
+  --name lpb-dockerized \
+  -e BOT_TOKEN=<YOUR_TOKEN_IN_PLAINTTEXT> \
+  -e DISCORD_CHANNEL_ID=<YOUR_ID_CHANNEL_IN_PLAINTTEXT> \
+  -v <HOTE PHYSIQUE>:/app/Assets \
+  lzerteur/lpb:<TAG>
 ```
 
 ⚠️ The DISCORD_CHANNEL_ID will be the channel used for some logs such as when the bot is restarted
@@ -28,6 +33,8 @@ services:
     environment:
       - BOT_TOKEN=<YOUR_TOKEN_IN_PLAINTTEXT>
       - DISCORD_CHANNEL_ID=<YOUR_ID_CHANNEL_IN_PLAINTTEXT>
+    volumes:
+      - <HOTE PHYSIQUE>:/app/Assets  # Montage du dossier de l'hôte dans le conteneur
     restart: unless-stopped
 ```
 
